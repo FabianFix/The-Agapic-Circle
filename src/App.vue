@@ -1,15 +1,13 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <agapic-header></agapic-header>
+  <router-view/>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+import AgapicHeader from './components/AgapicHeader.vue'
 export default {
-  name: 'App',
   components: {
-    HelloWorld
+    AgapicHeader
   }
 }
 </script>
@@ -20,7 +18,15 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  color: #000000;
+}
+
+nav a {
+  font-weight: bold;
+  color: #000000;
+}
+
+nav a.router-link-exact-active {
+  color: #FF0000;
 }
 </style>

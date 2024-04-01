@@ -1,0 +1,24 @@
+{
+    "antique": [
+
+    ],
+    "medieval": [
+
+    ],
+    "modern": [
+
+    ],
+    "post-modern": [
+        {
+            "id": "michel-foucault",
+            "born": "15-10-1926",
+            "died": "25-06-1984",
+            "title": "Michel Foucault",
+            "tags": ["Post-Modern", "LGBTQ+"],
+            "influencedBy": ["jean-paul-sartre"],
+            "summary": "Being one of the founders of Post-Modernism, Michel Foucault's great contribution to literature was his questioning of everything; from sexuality to shame and punishment.",
+            "imageUrl": "https://res.cloudinary.com/dzc0tlbqw/image/upload/v1712002352/rg22lki8frqpnki0cfw7.jpg"
+        }
+    ]
+
+}
