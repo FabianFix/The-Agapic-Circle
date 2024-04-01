@@ -3,14 +3,19 @@
     <div class="timePeriods">
       <div v-for="(section, index) in Object.keys(authors)" :key="index" class="group">
         <h2 class="center">{{section}}</h2>
-        <div class="section" v-for="author in authors[section]" :key="author.id">
-          <div class="author">
-            <h3 class="authorProfile" @click="$router.push({name: author.id})">
-              {{author.title}}
+        <div class="section">
+          <div v-for="author in authors[section]" :key="author.id">
+            <div class="author" @click="$router.push({name: author.id})">
+              <h3>{{author.title}}</h3>
               <img v-bind:src="author.imageUrl">
-              <span class="subtitle">{{author.born[6] + author.born[7] + author.born[8] + author.born[9]}} - {{author.died[6] + author.died[7] + author.died[8] + author.died[9]}}</span>
-            </h3>
-            <p>{{author.description}}</p>
+              <span class="subtitle">{{getDateOfBirth(author)}} - {{getDateOfDeath(author)}}</span>
+                <div class="tags">
+                  <div class="subtitle tag" v-for="tag in author.tags" :key="tag">
+                    {{tag}}
+                  </div>
+                </div>
+              <p class="subtitle"><i>{{author.summary}}</i></p>
+            </div>
           </div>
         </div>
       </div>
@@ -28,6 +33,17 @@ export default {
     authors() {
       return AUTHORS
     }
+  }, 
+  methods: {
+    getDateOfBirth: function (author) {
+      return author.born.slice(6)
+    },
+    getDateOfDeath: function (author) {
+      if (author.died.length < 4) {
+        return "Now"
+      }
+      return author.died.slice(author.died.length-4, author.died.length)
+    }
   }
 }
 </script>
@@ -41,10 +57,19 @@ export default {
   margin: 4rem auto;
   font-size: 4rem;
 }
+
 img {
   display: block;
   margin: 0 auto;
   width: 150px;
+  border-radius: 25px;
+}
+
+.tags {
+  display: flex; 
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem;
 }
 
 h2 {
@@ -53,35 +78,43 @@ h2 {
   margin-bottom: 2rem;
 }
 
-h3 {
+.author {
+  border: solid;
+  border-width: 1px;
+  border-radius: 25px;
+  padding-inline: 25px;
   display: flex;
   flex-direction: column;
-  color: #FF0000;
+  h3 {
+    color: #FF0000;
+    height: 2.5rem;
+  }
+  width: 150px;
+  &:hover {
+    h3 {
+       text-decoration: underline;
+    }
+  }
   margin-bottom: 0;
   cursor: pointer;
-  &:hover {
-    text-decoration: underline;
-  }
   .subtitle {
     color: grey;
-    font-size: .98rem;
+    font-size: 0.8rem;
     float: right;
     font-weight: normal;
   }
 }
 
-p {
-  margin-top: .4rem;
-}
-
-.sections {
-  max-width: 40vw;
-  margin: 0 auto;
-  margin-top: 4rem;
+.tag {
+  white-space: nowrap;
 }
 
 .section {
   margin-bottom: 3rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 50px;
+  justify-content: center;
 }
 
 .group {
