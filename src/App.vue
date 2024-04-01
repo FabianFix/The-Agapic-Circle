@@ -1,6 +1,6 @@
 <template>
   <agapic-header></agapic-header>
-  <router-view/>
+  <router-view class="state"/>
 </template>
 
 <script>
@@ -19,6 +19,10 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #000000;
+}
+
+.state {
+  padding-top: 20vh;
 }
 
 nav a {
