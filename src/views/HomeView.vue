@@ -1,12 +1,20 @@
 <template>
   <div class="home">
+    <div class="whiteBackground">
+      <div class="searchAuthorParent">
+        <input v-model="searchQuery" class="searchAuthor" placeholder="Search for a thinker" id=searchAuthor>
+        <router-link :to="``">
+          <img src="https://res.cloudinary.com/dzc0tlbqw/image/upload/v1711999509/ox7va20ary2dt12zudkz.png" alt="" class="magnifyingGlass">
+        </router-link>
+      </div>
+    </div>
     <div class="timePeriods">
-      <div v-for="context in contexts" :key="context.chronologicalOrder" class="group">
+      <div v-for="context in getNotEmptyContexts(authors, contexts, this.searchQuery)" :key="context.chronologicalOrder" class="group">
         <h2 class="center">{{context.name}}</h2>
         <div class="section">
-          <div v-for="author in getAuthorsOfContext(authors, context)" :key="author.id">
+          <div v-for="author in getAuthorsOfContext(authors, context, this.searchQuery)" :key="author.id">
             <div class="author" @click="$router.push({name: author.id})">
-              <h3>{{author.title}}</h3>
+              <h3>{{author.name}}</h3>
               <img v-bind:src="author.imageUrl">
               <span class="subtitle">{{getDateOfBirth(author)}} - {{getDateOfDeath(author)}}</span>
                 <div class="tags">
@@ -30,6 +38,11 @@ import CONTEXTS from '../statics/contexts.json'
 
 export default {
   name: 'HomeView',
+  data() {
+    return {
+      searchQuery: ""
+    }
+  },
   computed: {
     authors() {
       return AUTHORS
@@ -48,12 +61,29 @@ export default {
       }
       return author.died.slice(author.died.length-4, author.died.length)
     },
-    getAuthorsOfContext: function (authors, context) {
+    getAuthorsOfContext: function (authors, context, searchQuery) {
       return authors.filter((author) => {
         if(author.context == context.id) {
+          if(searchQuery != "") {
+            if (author.name.toLowerCase().includes(searchQuery.toLowerCase())){
+              return true
+            }
+            return false
+          }
           return true
         }
       })
+    },
+    searchQueryChange(evt) {
+      this.searchQuery = evt.target.value
+    },
+    getNotEmptyContexts: function (authors, contexts, searchQuery) {
+      const populatedContexts = contexts.filter((context => {
+        if(this.getAuthorsOfContext(authors, context, searchQuery).length != 0){
+          return true
+        }
+      }))
+      return populatedContexts
     }
   }
 }
@@ -67,13 +97,6 @@ export default {
   text-transform: uppercase;
   margin: 4rem auto;
   font-size: 4rem;
-}
-
-img {
-  display: block;
-  margin: 0 auto;
-  width: 150px;
-  border-radius: 25px;
 }
 
 .tags {
@@ -114,7 +137,39 @@ h2 {
     float: right;
     font-weight: normal;
   }
+  img {
+    display: block;
+    margin: 0 auto;
+    width: 150px;
+    border-radius: 25px;
+  }
   padding-bottom: 10px;
+}
+
+.whiteBackground {
+  position: fixed;
+}
+
+.searchAuthorParent {
+  width: 100vw;
+  display: flex;
+  gap: 2vw;
+  align-items: center;
+  justify-content: center;
+  margin-top: -3vh
+}
+
+.searchAuthor {
+  width: 70vw;
+  height: 4vh;
+  border-width: 0;
+  border-radius: 2vh;
+  padding-inline: 1rem;
+  background-color: #EEEEEE;
+}
+
+.magnifyingGlass {
+  height: 3vh;
 }
 
 .tag {
