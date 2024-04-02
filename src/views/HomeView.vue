@@ -6,13 +6,13 @@
       </div>
     </div>
     <div class="timePeriods">
-      <div v-for="context in getNotEmptyContexts(authors, contexts, this.searchQuery)" :key="context.id" class="group">
-        <h2 class="center">{{context.name}}</h2>
+      <div v-for="item in populatedContextsWithAuthors" :key="item.context.chronology" class="group">
+        <h2 class="center">{{item.context.name}}</h2>
         <div class="section">
-          <div v-for="author in getAuthorsOfContext(authors, context, this.searchQuery)" :key="author.id">
+          <div v-for="author in item.authors" :key="author.id">
             <div class="author" @click="$router.push({name: author.id})">
               <div class="centered"><h3>{{author.name}}</h3></div>
-              <img v-bind:src="author.imageUrl">
+              <img v-bind:src="author.image_url">
               <span class="subtitle">{{getDateOfBirth(author)}} - {{getDateOfDeath(author)}}</span>
                 <div class="tags">
                   <div class="subtitle tag" v-for="tag in author.tags" :key="tag">
@@ -29,60 +29,97 @@
 </template>
 
 <script>
-// @ is an alias to /src
-import AUTHORS from '../statics/authors.json'
-import CONTEXTS from '../statics/contexts.json'
+
+import { environment } from '@/environment/environment.js'
 
 export default {
   name: 'HomeView',
   data() {
     return {
-      searchQuery: ""
+      searchQuery: "",
+      populatedContextsWithAuthors: [],
+      contexts: []
     }
   },
-  computed: {
-    authors() {
-      return AUTHORS
-    },
-    contexts() {
-      return CONTEXTS
-    }
-  }, 
+  async mounted() {
+    await this.getAllContexts()
+    await this.updatePopulatedContextsWithAuthors();
+  },
   methods: {
     getDateOfBirth: function (author) {
-      return author.born.slice(author.born.length-4, author.born.length)
+      return author.born
     },
     getDateOfDeath: function (author) {
-      if (author.died.length < 4) {
+      if (!author.died) {
         return "Now"
       }
-      return author.died.slice(author.died.length-4, author.died.length)
+      return author.died
     },
-    getAuthorsOfContext: function (authors, context, searchQuery) {
-      return authors.filter((author) => {
-        if(author.context == context.id) {
-          if(searchQuery != "") {
-            if (author.name.toLowerCase().includes(searchQuery.toLowerCase())){
-              return true
-            }
-            return false
-          }
-          return true
+    async getAllContexts() {
+      const {data:contexts} = await environment.supabaseClient
+        .from('contexts')
+        .select('*')
+      this.contexts = contexts
+    },
+    async getPopulatedContextsWithAuthors() {
+      const populatedContextsWithAuthors = [];
+      for (const context of this.contexts) {
+        const authorsOfContext = await this.getAuthorsOfContext(context.id, this.searchQuery);
+        if (authorsOfContext.length !== 0) {
+          populatedContextsWithAuthors.push({
+            context: context,
+            authors: authorsOfContext
+          });
         }
-      })
+      }
+      return populatedContextsWithAuthors;
     },
-    searchQueryChange(evt) {
-      this.searchQuery = evt.target.value
-    },
-    getNotEmptyContexts: function (authors, contexts, searchQuery) {
-      const populatedContexts = contexts.filter((context => {
-        if(this.getAuthorsOfContext(authors, context, searchQuery).length != 0){
-          return true
+    async getAuthorsOfContext(contextId, searchQuery) {
+      if (searchQuery == "") {
+        const { data: authorsOfContext } = await environment.supabaseClient
+        .from("authors")
+        .select("*")
+        .filter("context_id", "eq", contextId);
+        if (authorsOfContext.length === 0) {
+          return [];
         }
-      }))
-      return populatedContexts
+        return authorsOfContext
+      }
+      else {
+        const { data: authorsOfContext } = await environment.supabaseClient
+          .from("authors")
+          .select("*")
+          .filter("context_id", "eq", contextId)
+          .ilike("name", "%" + searchQuery + "%");
+        if (authorsOfContext.length === 0) {
+          return [];
+        }
+        return authorsOfContext
+      }
+    },
+    async updatePopulatedContextsWithAuthors() {
+      this.populatedContextsWithAuthors = await this.getPopulatedContextsWithAuthors();
+      this.populatedContextsWithAuthors = this.populatedContextsWithAuthors.sort((a, b) => this.compareItemChronology(a, b))
+    },
+    compareItemChronology(a, b) {
+      if(a.context.chronology < b.context.chronology){
+        return -1
+      }
+      else if(a.context.chronology > b.context.chronology) {
+        return 1
+      }
+      else {
+        return 0
+      }
     }
-  }
+  },
+  watch: {
+    async searchQuery(newValue, oldValue) {
+      if (newValue !== oldValue) {
+        await this.updatePopulatedContextsWithAuthors();
+      }
+    }
+  },
 }
 </script>
 

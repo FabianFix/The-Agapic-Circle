@@ -1,18 +1,10 @@
 [
     {
+        "name": "Ancient Greek",
+        "id": "ancient-greek"
+    },
+    {
         "name": "Medieval",
         "id": "medieval"
-    },
-    {
-        "name": "Modern",
-        "id": "modern"
-    },
-    {
-        "name": "Post-Modern",
-        "id": "post-modern"
-    },
-    {
-        "name": "Metamodern",
-        "id": "metamodern"
     }
 ]

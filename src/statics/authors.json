@@ -1,77 +1,10 @@
 [
     {
-        "id": "michel-foucault",
-        "born": "15-10-1926",
-        "died": "25-06-1984",
-        "name": "Michel Foucault",
-        "context": "post-modern",
-        "tags": ["Post-Modern", "LGBTQ+"],
-        "influencedBy": ["jean-paul-sartre"],
-        "summary": "The father of post-modernism",
-        "notableWorks": [
-
-        ],
-        "secondaryLiterature": [],
-        "imageUrl": "https://res.cloudinary.com/dzc0tlbqw/image/upload/v1712002352/rg22lki8frqpnki0cfw7.jpg"
-    },
-    {
-        "id": "jordan-b-peterson",
-        "born": "12-06-1962",
-        "died": "",
-        "name": "Jordan B. Peterson",
-        "context": "metamodern",
-        "tags": ["New Sincerity", "Jungian"],
-        "influencedBy": ["carl-jung"],
-        "summary": "Popular psychologist and thinker",
-        "notableWorks": [
-
-        ],
-        "secondaryLiterature": [],
-        "imageUrl": "https://res.cloudinary.com/dzc0tlbqw/image/upload/e_grayscale/p5lnxiczdlklp6lagjbr.jpg"
-    },
-    {
-        "id": "albert-camus",
-        "born": "07-11-1913",
-        "died": "04-01-1960",
-        "name": "Albert Camus",
-        "context": "modern",
-        "tags": ["Absurdist", "Existentialist"],
-        "influencedBy": ["jean-paul-sartre"],
-        "summary": "The figurehead of absurdism",
-        "notableWorks": [
-
-        ],
-        "secondaryLiterature": [],
-        "imageUrl": "https://res.cloudinary.com/dzc0tlbqw/image/upload/v1712049494/oc65vss7huvvmwx4t1zy.jpg"
-    },
-    {
-        "id": "jean-paul-sartre",
-        "born": "21-06-1905",
-        "died": "15-04-1980",
-        "name": "Jean-Paul Sartre",
-        "context": "modern",
-        "tags": ["Marxist", "Existentialist"],
-        "influencedBy": ["albert-camus"],
-        "summary": "Existentialist powerhouse",
-        "notableWorks": [
-
-        ],
-        "secondaryLiterature": [],
-        "imageUrl": "https://res.cloudinary.com/dzc0tlbqw/image/upload/v1712049766/l415ng7tqd4h6b1zfxzp.jpg"
+        "id": "homer",
+        "context": "ancient-greek"
     },
     {
         "id": "dante-alighieri",
-        "born": "1265",
-        "died": "13-09-1321",
-        "name": "Dante Alighieri",
-        "context": "medieval",
-        "tags": ["Poet", "Dolce Stil Novo"],
-        "influencedBy": [],
-        "summary": "His poetry is still omnipresent",
-        "notableWorks": [
-            "the-divine-comedy"
-        ],
-        "secondaryLiterature": [],
-        "imageUrl": "https://res.cloudinary.com/dzc0tlbqw/image/upload/v1712071453/portrait-of-dante-alighieri-italian-poet-royalty-free-image-1691612150_wytwzi.jpg"
+        "context": "medieval"
     }
 ]

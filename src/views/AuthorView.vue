@@ -1,20 +1,20 @@
 <template>
   <div class="author">
     <div @click="$router.go(-1)" class="back" >&laquo; Back</div>
-    <div class="authorWrapper" :set="author = thisAuthor()">
+    <div class="authorWrapper" :set="author = this.author">
       <div>
         <h2>{{author.name}}</h2>
-        <img :src="author.imageUrl" alt="" class="profilePicture">
+        <img :src="author.image_url" alt="" class="profilePicture">
       </div>
       <div class="notableWorksWrapper">
         <h3>Notable Works</h3>
         <div class="notableWorks">
-          <a class="work" target="_blank" v-for="workId in author.notableWorks" :key="workId" :set="work = getWork(workId)" :href="work.storeUrl">
+          <a class="work" target="_blank" v-for="work in this.works" :key="work.id" :href="work.access_url">
             <h4>
               {{work.name}}
             </h4>
-            <span class="subtitle">Released: {{work.releaseYear}}</span>
-            <img class="profilePicture" :src="work.imageUrl" alt="">
+            <span class="subtitle">Released: {{work.release_year}}</span>
+            <img class="profilePicture" :src="work.image_url" alt="">
             <span class="subtitle">{{work.blurb}}</span>
           </a>
         </div>
@@ -25,21 +25,34 @@
   </div>
 </template>
 <script>
-import AUTHORS from '../statics/authors.json'
-import WORKS from '../statics/works.json'
+import { environment } from '@/environment/environment'
 
 export default {
   name: "AuthorPage",
+  data() {
+    return {
+      author: {},
+      works: []
+    }
+  },
+  async mounted(){
+    await this.thisAuthor()
+    await this.getWorks(this.author.id)
+  },
   methods: {
-    thisAuthor() {
-      return AUTHORS.filter(author => {
-        if(author.id == window.location.href.split("/")[window.location.href.split("/").length-1]){
-          return true
-        }
-      })[0]
+    async thisAuthor() {
+      const { data:author } = await environment.supabaseClient
+        .from("authors")
+        .select("*")
+        .filter('id', 'eq', window.location.href.split("/")[window.location.href.split("/").length-1])
+      this.author = author[0]
     }, 
-    getWork: function (workId) {
-      return WORKS.filter(work => work.id == workId)[0]
+    async getWorks (authorId) {
+      const { data: works } = await environment.supabaseClient
+        .from('works')
+        .select('*')
+        .filter('author_id', 'eq', authorId)
+      this.works = works
     }
   }
 }
