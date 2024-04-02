@@ -15,6 +15,9 @@
   .author {
     padding-inline: 5vw;
     padding-bottom: 5vh;
+    h2 {
+      color: #FF0000
+    }
   }
 
   p {
@@ -30,7 +33,4 @@
     text-align: left;
   }
 
-  h2 {
-    color: #FF0000
-  }
 </style>
