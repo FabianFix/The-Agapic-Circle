@@ -42,5 +42,16 @@
         "influencedBy": ["albert-camus"],
         "summary": "Existentialist powerhouse",
         "imageUrl": "https://res.cloudinary.com/dzc0tlbqw/image/upload/v1712049766/l415ng7tqd4h6b1zfxzp.jpg"
+    },
+    {
+        "id": "dante-alighieri",
+        "born": "1265",
+        "died": "13-09-1321",
+        "name": "Dante Alighieri",
+        "context": "medieval",
+        "tags": ["Poet", "Dolce Stil Novo"],
+        "influencedBy": [],
+        "summary": "His poetry is still omnipresent",
+        "imageUrl": "https://res.cloudinary.com/dzc0tlbqw/image/upload/v1712071453/portrait-of-dante-alighieri-italian-poet-royalty-free-image-1691612150_wytwzi.jpg"
     }
 ]
