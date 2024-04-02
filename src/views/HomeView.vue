@@ -137,10 +137,9 @@ h2 {
     font-weight: normal;
   }
   img {
-    display: block;
-    margin: 0 auto;
     width: 150px;
     border-radius: 25px;
+    z-index: -10;
   }
   padding-bottom: 10px;
 
