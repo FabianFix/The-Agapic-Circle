@@ -11,15 +11,15 @@
         <div class="section">
           <div v-for="author in getAuthorsOfContext(authors, context, this.searchQuery)" :key="author.id">
             <div class="author" @click="$router.push({name: author.id})">
-              <h3>{{author.name}}</h3>
+              <div class="centered"><h3>{{author.name}}</h3></div>
               <img v-bind:src="author.imageUrl">
               <span class="subtitle">{{getDateOfBirth(author)}} - {{getDateOfDeath(author)}}</span>
                 <div class="tags">
                   <div class="subtitle tag" v-for="tag in author.tags" :key="tag">
-                    {{tag}}
+                    <span>{{tag}}</span>
                   </div>
                 </div>
-              <p class="subtitle"><i>{{author.summary}}</i></p>
+              <span class="subtitle"><i>{{author.summary}}</i></span>
             </div>
           </div>
         </div>
@@ -118,14 +118,16 @@ h2 {
   flex-direction: column;
   h3 {
     color: #FF0000;
-    height: 2.5rem;
   }
-  width: 150px;
   &:hover {
     h3 {
-       text-decoration: underline;
+      text-decoration: underline;
+    }
+    img {
+      opacity: 80%;
     }
   }
+  width: 150px;
   margin-bottom: 0;
   cursor: pointer;
   .subtitle {
@@ -141,6 +143,15 @@ h2 {
     border-radius: 25px;
   }
   padding-bottom: 10px;
+
+  height: calc(300px);
+}
+
+.centered {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  height: 5rem;
 }
 
 .whiteBackground {
