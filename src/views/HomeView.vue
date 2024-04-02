@@ -3,13 +3,10 @@
     <div class="whiteBackground">
       <div class="searchAuthorParent">
         <input v-model="searchQuery" class="searchAuthor" placeholder="Search for a thinker" id=searchAuthor>
-        <router-link :to="``">
-          <img src="https://res.cloudinary.com/dzc0tlbqw/image/upload/v1711999509/ox7va20ary2dt12zudkz.png" alt="" class="magnifyingGlass">
-        </router-link>
       </div>
     </div>
     <div class="timePeriods">
-      <div v-for="context in getNotEmptyContexts(authors, contexts, this.searchQuery)" :key="context.chronologicalOrder" class="group">
+      <div v-for="context in getNotEmptyContexts(authors, contexts, this.searchQuery)" :key="context.id" class="group">
         <h2 class="center">{{context.name}}</h2>
         <div class="section">
           <div v-for="author in getAuthorsOfContext(authors, context, this.searchQuery)" :key="author.id">
@@ -148,6 +145,10 @@ h2 {
 
 .whiteBackground {
   position: fixed;
+  background-color: #FFFFFF;
+  height: 5vh;
+  margin-top: -3vh;
+  border: 1px solid #FFFFFF;
 }
 
 .searchAuthorParent {
@@ -156,20 +157,16 @@ h2 {
   gap: 2vw;
   align-items: center;
   justify-content: center;
-  margin-top: -3vh
+  margin-top: 0vh
 }
 
 .searchAuthor {
-  width: 70vw;
+  width: min(70vw, 400px);
   height: 4vh;
   border-width: 0;
   border-radius: 2vh;
   padding-inline: 1rem;
   background-color: #EEEEEE;
-}
-
-.magnifyingGlass {
-  height: 3vh;
 }
 
 .tag {

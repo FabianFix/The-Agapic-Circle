@@ -1,17 +1,14 @@
 [
     {
         "name": "Modern",
-        "id": "modern",
-        "chronologicalOrder": 9
+        "id": "modern"
     },
     {
         "name": "Post-Modern",
-        "id": "post-modern",
-        "chronologicalOrder": 10
+        "id": "post-modern"
     },
     {
         "name": "Metamodern",
-        "id": "metamodern",
-        "chronologicalOrder": 11
+        "id": "metamodern"
     }
 ]
