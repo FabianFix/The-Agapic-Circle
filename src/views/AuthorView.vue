@@ -1,12 +1,12 @@
 <template>
   <div class="author">
-    <router-link to="/" class="back" >&laquo; Back</router-link>
+    <div @click="$router.go(-1)" class="back" >&laquo; Back</div>
     <router-view />
-    <router-link to="/" class="back" >&laquo; Back</router-link>
+    <div @click="$router.go(-1)" class="back" >&laquo; Back</div>
   </div>
 </template>
 
-<style>
+<style lang="scss">
   .profilePicture {
     width: 200px;
     border-radius: 20px;
@@ -18,6 +18,15 @@
   }
 
   p {
+    text-align: left;
+  }
+
+  .back {
+    &:hover {
+      opacity: 50%;
+      cursor: pointer;
+      text-decoration: underline;
+    }
     text-align: left;
   }
 
