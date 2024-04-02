@@ -114,6 +114,7 @@ h2 {
     float: right;
     font-weight: normal;
   }
+  padding-bottom: 10px;
 }
 
 .tag {

@@ -20,5 +20,27 @@
         "influencedBy": ["carl-jung"],
         "summary": "Popular psychologist and thinker",
         "imageUrl": "https://res.cloudinary.com/dzc0tlbqw/image/upload/e_grayscale/p5lnxiczdlklp6lagjbr.jpg"
+    },
+    {
+        "id": "albert-camus",
+        "born": "07-11-1913",
+        "died": "04-01-1960",
+        "title": "Albert Camus",
+        "context": "modern",
+        "tags": ["Absurdist", "Existentialist"],
+        "influencedBy": ["jean-paul-sartre"],
+        "summary": "The figurehead of absurdism",
+        "imageUrl": "https://res.cloudinary.com/dzc0tlbqw/image/upload/v1712049494/oc65vss7huvvmwx4t1zy.jpg"
+    },
+    {
+        "id": "jean-paul-sartre",
+        "born": "21-06-1905",
+        "died": "15-04-1980",
+        "title": "Jean-Paul Sartre",
+        "context": "modern",
+        "tags": ["Marxist", "Existentialist"],
+        "influencedBy": ["albert-camus"],
+        "summary": "Existentialist powerhouse",
+        "imageUrl": "https://res.cloudinary.com/dzc0tlbqw/image/upload/v1712049766/l415ng7tqd4h6b1zfxzp.jpg"
     }
 ]

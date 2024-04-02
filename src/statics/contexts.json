@@ -1,5 +1,10 @@
 [
     {
+        "name": "Modern",
+        "id": "modern",
+        "chronologicalOrder": 9
+    },
+    {
         "name": "Post-Modern",
         "id": "post-modern",
         "chronologicalOrder": 10
