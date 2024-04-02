@@ -31,6 +31,7 @@
       text-decoration: underline;
     }
     text-align: left;
+    width: fit-content;
   }
 
 </style>
