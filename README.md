@@ -1,4 +1,4 @@
-## All of philosophy in one place
+## All of Philosophy in One Place
 
 The Agapic Circle is a peer-reviewed open-source repository detailing the thoughts, works and lives of some of the world's greatest thinkers. We believe that no great ideas come in isolation, but instead that they are shaped by their surroundings, the conversations had by the thinkers and the events surrounding them. 
 
