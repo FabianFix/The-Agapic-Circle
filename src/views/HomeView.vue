@@ -163,8 +163,8 @@ h2 {
 }
 
 .searchAuthorParent {
-  width: 100vw;
   display: flex;
+  width: 90vw;
   gap: 2vw;
   align-items: center;
   justify-content: center;
