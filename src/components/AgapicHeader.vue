@@ -1,6 +1,6 @@
 <template>
   <div class="header">
-    <h1>The Agapic Circle</h1>
+    <h1>The <span style="color: #FF0000;">Agapic</span> Circle</h1>
     <nav>
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link>
@@ -26,12 +26,12 @@ export default {
   .header{
     display: flex;
     flex-direction: column;
-    gap: 2vh;
+    gap: 1vh;
     justify-content: center;
     align-items: center;
     position: fixed;
     width: 100%;
-    margin-top: -1.5rem;
+    margin-top: -8px;
     background-color: #FFFFFF;
   }
 
@@ -46,6 +46,10 @@ export default {
 
   .magnifyingGlass {
     height: 3vh;
+  }
+
+  h1 {
+    height: 5vh;
   }
 
   .searchAuthorParent {
