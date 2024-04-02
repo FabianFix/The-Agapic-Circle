@@ -1,10 +1,10 @@
 <template>
   <div class="home">
     <div class="timePeriods">
-      <div v-for="(section, index) in Object.keys(authors)" :key="index" class="group">
-        <h2 class="center">{{section}}</h2>
+      <div v-for="context in contexts" :key="context.chronologicalOrder" class="group">
+        <h2 class="center">{{context.name}}</h2>
         <div class="section">
-          <div v-for="author in authors[section]" :key="author.id">
+          <div v-for="author in getAuthorsOfContext(authors, context)" :key="author.id">
             <div class="author" @click="$router.push({name: author.id})">
               <h3>{{author.title}}</h3>
               <img v-bind:src="author.imageUrl">
@@ -26,12 +26,16 @@
 <script>
 // @ is an alias to /src
 import AUTHORS from '../statics/authors.json'
+import CONTEXTS from '../statics/contexts.json'
 
 export default {
   name: 'HomeView',
   computed: {
     authors() {
       return AUTHORS
+    },
+    contexts() {
+      return CONTEXTS
     }
   }, 
   methods: {
@@ -43,6 +47,13 @@ export default {
         return "Now"
       }
       return author.died.slice(author.died.length-4, author.died.length)
+    },
+    getAuthorsOfContext: function (authors, context) {
+      return authors.filter((author) => {
+        if(author.context == context.id) {
+          return true
+        }
+      })
     }
   }
 }

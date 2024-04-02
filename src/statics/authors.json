@@ -1,34 +1,24 @@
-{
-    "antique": [
-
-    ],
-    "medieval": [
-
-    ],
-    "modern": [
-
-    ],
-    "post-modern": [
-        {
-            "id": "michel-foucault",
-            "born": "15-10-1926",
-            "died": "25-06-1984",
-            "title": "Michel Foucault",
-            "tags": ["Post-Modern", "LGBTQ+"],
-            "influencedBy": ["jean-paul-sartre"],
-            "summary": "The father of post-modernism",
-            "imageUrl": "https://res.cloudinary.com/dzc0tlbqw/image/upload/v1712002352/rg22lki8frqpnki0cfw7.jpg"
-        },
-        {
-            "id": "jordan-b-peterson",
-            "born": "12-06-1962",
-            "died": "",
-            "title": "Jordan B. Peterson",
-            "tags": ["New Sincerity", "Jungian"],
-            "influencedBy": ["carl-jung"],
-            "summary": "Popular psychologist and thinker",
-            "imageUrl": "https://res.cloudinary.com/dzc0tlbqw/image/upload/e_grayscale/p5lnxiczdlklp6lagjbr.jpg"
-        }
-    ]
-
-}
+[
+    {
+        "id": "michel-foucault",
+        "born": "15-10-1926",
+        "died": "25-06-1984",
+        "title": "Michel Foucault",
+        "context": "post-modern",
+        "tags": ["Post-Modern", "LGBTQ+"],
+        "influencedBy": ["jean-paul-sartre"],
+        "summary": "The father of post-modernism",
+        "imageUrl": "https://res.cloudinary.com/dzc0tlbqw/image/upload/v1712002352/rg22lki8frqpnki0cfw7.jpg"
+    },
+    {
+        "id": "jordan-b-peterson",
+        "born": "12-06-1962",
+        "died": "",
+        "title": "Jordan B. Peterson",
+        "context": "post-modern",
+        "tags": ["New Sincerity", "Jungian"],
+        "influencedBy": ["carl-jung"],
+        "summary": "Popular psychologist and thinker",
+        "imageUrl": "https://res.cloudinary.com/dzc0tlbqw/image/upload/e_grayscale/p5lnxiczdlklp6lagjbr.jpg"
+    }
+]
