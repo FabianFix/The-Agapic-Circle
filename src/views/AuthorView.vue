@@ -1,18 +1,24 @@
 <template>
   <div class="author">
     <div @click="$router.go(-1)" class="back" >&laquo; Back</div>
-    <h2>{{thisAuthor().name}}</h2>
-    <img :src="thisAuthor().imageUrl" alt="" class="profilePicture">
-    <h3>Notable Works</h3>
-    <div class="notableWorks">
-      <a class="work" target="_blank" :href="getWork(workId).storeUrl" v-for="workId in thisAuthor().notableWorks" :key="workId">
-        <h4>
-          {{getWork(workId).name}}
-        </h4>
-        <span class="subtitle">Released: {{getWork(workId).releaseYear}}</span>
-        <img class="profilePicture" :src="getWork(workId).imageUrl" alt="">
-        <span class="subtitle">{{getWork(workId).blurb}}</span>
-      </a>
+    <div class="authorWrapper" :set="author = thisAuthor()">
+      <div>
+        <h2>{{author.name}}</h2>
+        <img :src="author.imageUrl" alt="" class="profilePicture">
+      </div>
+      <div class="notableWorksWrapper">
+        <h3>Notable Works</h3>
+        <div class="notableWorks">
+          <a class="work" target="_blank" v-for="workId in author.notableWorks" :key="workId" :set="work = getWork(workId)" :href="work.storeUrl">
+            <h4>
+              {{work.name}}
+            </h4>
+            <span class="subtitle">Released: {{work.releaseYear}}</span>
+            <img class="profilePicture" :src="work.imageUrl" alt="">
+            <span class="subtitle">{{work.blurb}}</span>
+          </a>
+        </div>
+      </div>
     </div>
     <router-view />
     <div @click="$router.go(-1)" class="back" >&laquo; Back</div>
@@ -40,8 +46,17 @@ export default {
 </script>
 <style lang="scss">
   .profilePicture {
-    width: 200px;
+    width: 250px;
+    height: 250px;
     border-radius: 20px;
+  }
+
+  .authorWrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 50px;
+    justify-content: space-evenly;
+    align-items: center;
   }
 
   .author {
@@ -97,6 +112,8 @@ export default {
     }
     img {
       width: 150px;
+      height: 150px;
+
       border-radius: 25px;
       z-index: -10;
     }
