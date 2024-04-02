@@ -8,6 +8,10 @@
         "tags": ["Post-Modern", "LGBTQ+"],
         "influencedBy": ["jean-paul-sartre"],
         "summary": "The father of post-modernism",
+        "notableWorks": [
+
+        ],
+        "secondaryLiterature": [],
         "imageUrl": "https://res.cloudinary.com/dzc0tlbqw/image/upload/v1712002352/rg22lki8frqpnki0cfw7.jpg"
     },
     {
@@ -19,6 +23,10 @@
         "tags": ["New Sincerity", "Jungian"],
         "influencedBy": ["carl-jung"],
         "summary": "Popular psychologist and thinker",
+        "notableWorks": [
+
+        ],
+        "secondaryLiterature": [],
         "imageUrl": "https://res.cloudinary.com/dzc0tlbqw/image/upload/e_grayscale/p5lnxiczdlklp6lagjbr.jpg"
     },
     {
@@ -30,6 +38,10 @@
         "tags": ["Absurdist", "Existentialist"],
         "influencedBy": ["jean-paul-sartre"],
         "summary": "The figurehead of absurdism",
+        "notableWorks": [
+
+        ],
+        "secondaryLiterature": [],
         "imageUrl": "https://res.cloudinary.com/dzc0tlbqw/image/upload/v1712049494/oc65vss7huvvmwx4t1zy.jpg"
     },
     {
@@ -41,6 +53,10 @@
         "tags": ["Marxist", "Existentialist"],
         "influencedBy": ["albert-camus"],
         "summary": "Existentialist powerhouse",
+        "notableWorks": [
+
+        ],
+        "secondaryLiterature": [],
         "imageUrl": "https://res.cloudinary.com/dzc0tlbqw/image/upload/v1712049766/l415ng7tqd4h6b1zfxzp.jpg"
     },
     {
@@ -52,6 +68,10 @@
         "tags": ["Poet", "Dolce Stil Novo"],
         "influencedBy": [],
         "summary": "His poetry is still omnipresent",
+        "notableWorks": [
+            "the-divine-comedy"
+        ],
+        "secondaryLiterature": [],
         "imageUrl": "https://res.cloudinary.com/dzc0tlbqw/image/upload/v1712071453/portrait-of-dante-alighieri-italian-poet-royalty-free-image-1691612150_wytwzi.jpg"
     }
 ]
