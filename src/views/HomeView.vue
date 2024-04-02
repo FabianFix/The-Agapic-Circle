@@ -50,7 +50,7 @@ export default {
   }, 
   methods: {
     getDateOfBirth: function (author) {
-      return author.born.slice(6)
+      return author.born.slice(author.born.length-4, author.born.length)
     },
     getDateOfDeath: function (author) {
       if (author.died.length < 4) {
