@@ -7,9 +7,9 @@
     </nav>
     <div class="searchAuthorParent">
       <input class="searchAuthor" placeholder="Search for a thinker" id=searchAuthor>
-      <a href="">
+      <router-link :to="``">
         <img src="https://res.cloudinary.com/dzc0tlbqw/image/upload/v1711999509/ox7va20ary2dt12zudkz.png" alt="" class="magnifyingGlass">
-      </a>
+      </router-link>
     </div>
   </div>
 </template>
@@ -18,7 +18,6 @@
 export default {
   name: 'AgapicHeader'
 }
-
 
 </script>
 
