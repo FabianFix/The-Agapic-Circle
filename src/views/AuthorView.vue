@@ -17,6 +17,10 @@
     padding-bottom: 5vh;
   }
 
+  p {
+    text-align: left;
+  }
+
   h2 {
     color: #FF0000
   }
