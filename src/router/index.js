@@ -30,10 +30,16 @@ const routes = [
     component: HomeView
   },
   {
+    path: '/:pathMatch(.*)*',
+    name: 'notFound',
+    component: () => import('../views/PageNotFound.vue')
+  },
+  {
     path: '/about',
     name: 'about',
     component: () => import('../../README.md')
-  }, ...authorRoutes
+  }, 
+  ...authorRoutes
 ]
 
 const router = createRouter({
