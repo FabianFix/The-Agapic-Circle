@@ -27,6 +27,11 @@ body {
 
 .state {
   padding-top: 20vh;
+  padding-inline: 5vw;
+}
+
+p {
+  text-align: left;
 }
 
 nav a {
