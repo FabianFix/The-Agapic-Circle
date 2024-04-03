@@ -19,7 +19,7 @@
                     <span>{{tag}}</span>
                   </div>
                 </div>
-              <span class="subtitle"><i>{{author.summary}}</i></span>
+              <span class="subtitle summary"><i>{{author.summary}}</i></span>
             </div>
           </div>
         </div>
@@ -173,6 +173,12 @@ h2 {
     float: right;
     font-weight: normal;
   }
+  .summary {
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
   img {
     width: 150px;
     border-radius: 25px;
@@ -180,7 +186,7 @@ h2 {
   }
   padding-bottom: 10px;
 
-  height: calc(300px);
+  height: fit-content;
 }
 
 .centered {
