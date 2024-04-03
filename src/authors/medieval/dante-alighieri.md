@@ -1,3 +1,0 @@
-### Background
-
-No content yet

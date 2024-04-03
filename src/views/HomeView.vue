@@ -10,7 +10,7 @@
         <h2 class="center">{{item.context.name}}</h2>
         <div class="section">
           <div v-for="author in item.authors" :key="author.id">
-            <div class="author" @click="$router.push({name: author.id})">
+            <div class="author" @click="$router.push({path: 'author/' + author.id})">
               <div class="centered"><h3>{{author.name}}</h3></div>
               <img v-bind:src="author.image_url">
               <span class="subtitle">{{getDateOfBirth(author)}} - {{getDateOfDeath(author)}}</span>

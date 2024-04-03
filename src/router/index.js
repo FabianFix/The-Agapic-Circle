@@ -1,27 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
-import authors from '../statics/authors.json';
-import contexts from '../statics/contexts.json'
-
-const authorRoutes = contexts.map(context => {
-  const children = authors.filter((author) => {
-    if(author.context == context.id){
-      return true
-    }
-  }).map((author) => {
-    return {
-      path: `/${author.id}`,
-      name: author.id,
-      component: () => import(`../authors/${context.id}/${author.id}.md`),
-    }
-  })
-  return {
-    path: `/${context.id}`,
-    name: context.id,
-    component: () => import('../views/AuthorView.vue'),
-    children
-  }
-})
 
 const routes = [
   {
@@ -39,7 +17,11 @@ const routes = [
     name: 'about',
     component: () => import('../../README.md')
   }, 
-  ...authorRoutes
+  {
+    path: '/author/:id',
+    name: 'author',
+    component: () => import('@/views/AuthorView.vue')
+  }
 ]
 
 const router = createRouter({

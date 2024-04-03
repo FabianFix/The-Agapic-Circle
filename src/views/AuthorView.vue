@@ -20,7 +20,14 @@
         </div>
       </div>
     </div>
-    <router-view />
+    <div class="article">
+      <h3>
+        This is an article
+      </h3>
+      <p>
+        Lorem ipsum dolor sit amet...
+      </p>
+    </div>
     <div @click="$router.go(-1)" class="back" >&laquo; Back</div>
   </div>
 </template>
