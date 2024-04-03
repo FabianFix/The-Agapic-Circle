@@ -1,5 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
+import PageNotFound from '@/views/PageNotFound.vue'
+import AuthorPage from '@/views/AuthorView.vue'
 
 const routes = [
   {
@@ -10,7 +12,7 @@ const routes = [
   {
     path: '/:pathMatch(.*)*',
     name: 'notFound',
-    component: () => import('../views/PageNotFound.vue')
+    component: () => PageNotFound
   },
   {
     path: '/about',
@@ -20,7 +22,7 @@ const routes = [
   {
     path: '/author/:id',
     name: 'author',
-    component: () => import('@/views/AuthorView.vue')
+    component: () => AuthorPage
   }
 ]
 
