@@ -14,12 +14,35 @@
                 {{article.body[index]}}
             </p>
         </div>
+        <p v-if="article.title">
+            Written by: {{article.written_by}} <br>
+            Written date: {{article.created_at.split('T')[0]}} <br>
+            Last updated: {{article.last_updated.split('T')[0]}}
+        </p>
         <div class="navigationFooter">
             <div @click="$router.go(-1)" class="back" v-if="article.title">&laquo; Back</div>
             <div v-if="nextArticle.id">
                 Further Reading
                 <div class="nextArticle next" @click="$router.push({name: 'article', params: {id: nextArticle.id}})">
                     {{nextArticle.title}} &raquo; <img :src="nextArticle.image_url">
+                </div>
+            </div>
+        </div>
+        <div>
+            <h5 class="footnotes">Footnotes</h5>
+            <div v-for="(footnote, index) in footnotes" :key="footnote" class="footnote">
+                <h5>
+                    [{{index + 1}}]
+                    <a :href="footnote.article_url">{{footnote.article_name}},</a>
+                </h5>
+                <div>
+                    Authors: 
+                    <span v-for="(author, index) in footnote.author_names" :key="author">
+                        {{author}}<span v-if="footnote.author_names[index+1]"> | </span>
+                    </span>,
+                </div>
+                <div>
+                    Published: {{footnote.published_date}}
                 </div>
             </div>
         </div>
@@ -37,6 +60,7 @@ export default {
             article: {},
             author: {},
             nextArticle: {},
+            footnotes: [],
             image: ""
         }
     },
@@ -50,6 +74,18 @@ export default {
             this.image = this.author.image_url
         }
         this.nextArticle = await this.getNextArticle(this.article.next_article_id)
+        const footnotesTemp = await this.getFootnotes(this.article.footnotes)
+        for (let footnote of this.article.footnotes) {
+            let index = 0
+            for (let footnoteTemp of footnotesTemp) {
+                if (footnote == footnoteTemp.id){
+                    this.footnotes.push(footnoteTemp)
+                    footnotesTemp.pop(index, 1)
+                    break
+                }
+                index ++
+            }
+        }
     },
     methods: {
         async getArticle(articleId) {
@@ -74,6 +110,15 @@ export default {
                 .select("*")
                 .filter('id', 'eq', authorId)
             return author[0] ?? {}
+        },
+
+        async getFootnotes(footnoteIds) {
+            const {data:footnotes} = await environment.supabaseClient
+                .from("footnotes")
+                .select("*")
+                .filter("id", 'in', `(${footnoteIds})`)
+            console.log(footnotes, footnoteIds)
+            return footnotes
         }
     }
 }
@@ -100,6 +145,10 @@ export default {
     align-items: center;
 }
 
+.footnotes {
+    margin-bottom: 0px
+}
+
 .nextArticle {
     padding: 10px;
     margin: 10px;
@@ -114,6 +163,14 @@ export default {
         height: 2rem;
         border-radius: 0.5rem;
     }
+}
+
+.footnote {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    gap: 10px;
 }
 
 </style>
