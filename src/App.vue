@@ -74,7 +74,7 @@ nav a.router-link-exact-active {
     align-items: center;
 
     img {
-        width: 20vw;
+        width: 150px;
     }
 }
 </style>

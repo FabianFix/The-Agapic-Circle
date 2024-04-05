@@ -1,11 +1,14 @@
 <template>
   <div class="home">
-    <div class="whiteBackground">
+    <div class="loading" v-if="this.loading">
+      <img src="../assets/loading.gif" alt="">
+    </div>
+    <div class="whiteBackground" v-if="!this.loading">
       <div class="searchAuthorParent">
         <input v-model="searchQuery" class="searchAuthor" placeholder="Search for a thinker" id=searchAuthor>
       </div>
     </div>
-    <div class="timePeriods">
+    <div class="timePeriods" v-if="!this.loading">
       <div v-for="item in populatedContextsWithAuthors" :key="item.context.chronology" class="group">
         <h2 class="center">{{item.context.name}}</h2>
         <div class="section">
@@ -38,12 +41,15 @@ export default {
     return {
       searchQuery: "",
       populatedContextsWithAuthors: [],
+      loading: true,
       contexts: []
     }
   },
   async mounted() {
+    this.loading = true
     await this.getAllContexts()
     await this.updatePopulatedContextsWithAuthors();
+    this.loading = false
   },
   methods: {
     getDateOfBirth: function (author) {
