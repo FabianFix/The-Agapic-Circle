@@ -28,7 +28,7 @@
             <div class="navigationFooter">
                 <div @click="$router.go(-1)" class="back" v-if="article.title">&laquo; Back</div>
                 <div v-if="nextArticle.id">
-                    Further Reading
+                    <span class="bold red underline">Further Reading</span>
                     <div class="nextArticle next" @click="$router.push({name: 'article', params: {id: nextArticle.id}})">
                         {{nextArticle.title}} &raquo; <img :src="nextArticle.image_url">
                     </div>

@@ -77,4 +77,16 @@ nav a.router-link-exact-active {
         width: 150px;
     }
 }
+
+.bold {
+  font-weight: 700;
+}
+
+.red {
+  color: #FF0000;
+}
+
+.underline {
+  text-decoration: underline;
+}
 </style>
