@@ -1,25 +1,30 @@
 <template>
   <div class="author">
-    <div @click="$router.go(-1)" class="back" >&laquo; Back</div>
-    <div class="authorWrapper" :set="author = this.author">
-      <div class="authorProfile">
-        <h2>{{author.name}}</h2>
-        <img :src="author.image_url" alt="" class="profilePicture">
-        <div class="goToAbout" @click="$router.push({name:'article',params:{id:`about-${author.id}`}})">
-          About {{author.name}} &raquo;
+    <div class="loading" v-if="this.loading">
+      <img src="../assets/loading.gif" alt="">
+    </div>
+    <div v-if="!this.loading">
+      <div @click="$router.go(-1)" class="back" >&laquo; Back</div>
+      <div class="authorWrapper" :set="author = this.author">
+        <div class="authorProfile">
+          <h2>{{author.name}}</h2>
+          <img :src="author.image_url" alt="" class="profilePicture">
+          <div class="goToAbout" @click="$router.push({name:'article',params:{id:`about-${author.id}`}})">
+            About {{author.name}} &raquo;
+          </div>
         </div>
-      </div>
-      <div class="notableWorksWrapper">
-        <h3>Notable Works</h3>
-        <div class="notableWorks">
-          <a class="work" target="_blank" v-for="work in this.works" :key="work.id" :href="work.access_url">
-            <h4>
-              {{work.name}}
-            </h4>
-            <span class="subtitle">Released: {{work.release_year}}</span>
-            <img class="profilePicture" :src="work.image_url" alt="">
-            <span class="subtitle">{{work.blurb}}</span>
-          </a>
+        <div class="notableWorksWrapper">
+          <h3>Notable Works</h3>
+          <div class="notableWorks">
+            <a class="work" target="_blank" v-for="work in this.works" :key="work.id" :href="work.access_url">
+              <h4>
+                {{work.name}}
+              </h4>
+              <span class="subtitle">Released: {{work.release_year}}</span>
+              <img class="profilePicture" :src="work.image_url" alt="">
+              <span class="subtitle">{{work.blurb}}</span>
+            </a>
+          </div>
         </div>
       </div>
     </div>
@@ -33,12 +38,15 @@ export default {
   data() {
     return {
       author: {},
+      loading: true,
       works: []
     }
   },
   async mounted(){
+    this.loading = true
     await this.thisAuthor()
     await this.getWorks(this.author.id)
+    this.loading = false
   },
   methods: {
     async thisAuthor() {

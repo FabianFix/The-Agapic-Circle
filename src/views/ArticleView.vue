@@ -1,48 +1,55 @@
 <template>
     <div class="article">
-        <div @click="$router.go(-1)" class="back" >&laquo; Back</div>
-        <h2>
-            {{article.title ?? "No article has been written yet"}}
-        </h2>
-        <img class="profilePicture" :src="image" v-if="image"> 
-
-        <div v-for="(heading, index) in article.headings" :key="index">
-            <h3>
-                {{heading}}
-            </h3>
-            <p>
-                {{article.body[index]}}
-            </p>
+        <div class="loading" v-if="this.loading">
+            <img src="../assets/loading.gif" alt="">
         </div>
-        <p v-if="article.title">
-            Written by: {{article.written_by}} <br>
-            Written date: {{article.created_at.split('T')[0]}} <br>
-            Last updated: {{article.last_updated.split('T')[0]}}
-        </p>
-        <div class="navigationFooter">
-            <div @click="$router.go(-1)" class="back" v-if="article.title">&laquo; Back</div>
-            <div v-if="nextArticle.id">
-                Further Reading
-                <div class="nextArticle next" @click="$router.push({name: 'article', params: {id: nextArticle.id}})">
-                    {{nextArticle.title}} &raquo; <img :src="nextArticle.image_url">
+        <div v-if="!this.loading">
+            <div @click="$router.go(-1)" class="back" >&laquo; Back</div>
+            <h2 v-if="!this.loading">
+                {{article.title ?? "No article has been written yet"}}
+            </h2>
+            <img class="profilePicture" :src="image" v-if="image"> 
+            <div v-if="article.title">
+                <div v-for="(heading, index) in article.headings" :key="index">
+                    <h3>
+                        {{heading}}
+                    </h3>
+                    <p>
+                        {{article.body[index]}}
+                    </p>
                 </div>
             </div>
-        </div>
-        <div>
-            <h5 class="footnotes">Footnotes</h5>
-            <div v-for="(footnote, index) in footnotes" :key="footnote" class="footnote">
-                <h5>
-                    [{{index + 1}}]
-                    <a :href="footnote.article_url">{{footnote.article_name}},</a>
-                </h5>
-                <div>
-                    Authors: 
-                    <span v-for="(author, index) in footnote.author_names" :key="author">
-                        {{author}}<span v-if="footnote.author_names[index+1]"> | </span>
-                    </span>,
+            
+            <p v-if="article.title">
+                Written by: {{article.written_by}} <br>
+                Written date: {{article.created_at.split('T')[0]}} <br>
+                Last updated: {{article.last_updated.split('T')[0]}}
+            </p>
+            <div class="navigationFooter">
+                <div @click="$router.go(-1)" class="back" v-if="article.title">&laquo; Back</div>
+                <div v-if="nextArticle.id">
+                    Further Reading
+                    <div class="nextArticle next" @click="$router.push({name: 'article', params: {id: nextArticle.id}})">
+                        {{nextArticle.title}} &raquo; <img :src="nextArticle.image_url">
+                    </div>
                 </div>
-                <div>
-                    Published: {{footnote.published_date}}
+            </div>
+            <div v-if="article.title">
+                <h5 class="footnotes">Footnotes</h5>
+                <div v-for="(footnote, index) in footnotes" :key="footnote" class="footnote">
+                    <h5>
+                        [{{index + 1}}]
+                        <a :href="footnote.article_url">{{footnote.article_name}},</a>
+                    </h5>
+                    <div>
+                        Authors: 
+                        <span v-for="(author, index) in footnote.author_names" :key="author">
+                            {{author}}<span v-if="footnote.author_names[index+1]"> | </span>
+                        </span>,
+                    </div>
+                    <div>
+                        Published: {{footnote.published_date}}
+                    </div>
                 </div>
             </div>
         </div>
@@ -61,11 +68,17 @@ export default {
             author: {},
             nextArticle: {},
             footnotes: [],
+            loading: true,
             image: ""
         }
     },
     async mounted() {
+        this.loading = true
         this.article = await this.getArticle(window.location.href.split("/")[window.location.href.split("/").length-1])
+        if(!this.article.title){
+            this.loading = false
+            return
+        }
         this.author = await this.thisAuthor(this.article.about_main_author)
         if(this.article.image_url) {
             this.image = this.article.image_url
@@ -86,6 +99,7 @@ export default {
                 index ++
             }
         }
+        this.loading = false
     },
     methods: {
         async getArticle(articleId) {
@@ -117,7 +131,6 @@ export default {
                 .from("footnotes")
                 .select("*")
                 .filter("id", 'in', `(${footnoteIds})`)
-            console.log(footnotes, footnoteIds)
             return footnotes
         }
     }

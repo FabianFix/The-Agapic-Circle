@@ -63,4 +63,18 @@ nav a {
 nav a.router-link-exact-active {
   color: #FF0000;
 }
+
+.loading {
+    width: 90vw;
+    height: 80vh;
+    margin-top: -20vh;
+    background-color: #FFFFFF;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    img {
+        width: 20vw;
+    }
+}
 </style>
