@@ -21,7 +21,12 @@ const routes = [
     path: '/author/:id',
     name: 'author',
     component: () => import('@/views/AuthorView.vue')
-  }
+  },
+  {
+    path: '/article/:id',
+    name: 'article',
+    component: () => import('@/views/ArticleView.vue')
+  },
 ]
 
 const router = createRouter({

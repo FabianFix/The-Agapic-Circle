@@ -2,9 +2,12 @@
   <div class="author">
     <div @click="$router.go(-1)" class="back" >&laquo; Back</div>
     <div class="authorWrapper" :set="author = this.author">
-      <div>
+      <div class="authorProfile">
         <h2>{{author.name}}</h2>
         <img :src="author.image_url" alt="" class="profilePicture">
+        <div class="goToAbout" @click="$router.push({name:'article',params:{id:`about-${author.id}`}})">
+          About {{author.name}} &raquo;
+        </div>
       </div>
       <div class="notableWorksWrapper">
         <h3>Notable Works</h3>
@@ -20,22 +23,13 @@
         </div>
       </div>
     </div>
-    <div class="article">
-      <h3>
-        This is an article
-      </h3>
-      <p>
-        Lorem ipsum dolor sit amet...
-      </p>
-    </div>
-    <div @click="$router.go(-1)" class="back" >&laquo; Back</div>
   </div>
 </template>
 <script>
 import { environment } from '@/environment/environment'
 
 export default {
-  name: "AuthorPage",
+  name: "AuthorView",
   data() {
     return {
       author: {},
@@ -91,16 +85,6 @@ export default {
     text-align: left;
   }
 
-  .back {
-    &:hover {
-      opacity: 50%;
-      cursor: pointer;
-      text-decoration: underline;
-    }
-    text-align: left;
-    width: fit-content;
-  }
-
   .work {
     border: solid;
     border-width: 1px;
@@ -147,6 +131,26 @@ export default {
     flex-wrap: wrap;
     gap: 50px;
     justify-content: center;
+  }
+
+  .goToAbout {
+    margin-top: 10px;
+    padding: 10px;
+    cursor: pointer;
+    &:hover {
+      opacity: 80%;
+    }
+    background-color: #FF0000;
+    width: fit-content;
+    border-radius: 10px;
+    font-weight: 700;
+  }
+
+  .authorProfile {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
   }
 
 </style>

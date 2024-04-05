@@ -12,7 +12,7 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
 
 body {
   margin: 0px;
@@ -33,6 +33,27 @@ body {
 p {
   text-align: left;
 }
+
+.back {
+    &:hover {
+      opacity: 50%;
+      cursor: pointer;
+      text-decoration: underline;
+    }
+    text-align: left;
+    width: fit-content;
+  }
+
+.next {
+    &:hover {
+      opacity: 50%;
+      cursor: pointer;
+      text-decoration: underline;
+    }
+    text-align: right;
+    width: fit-content;
+  }
+
 
 nav a {
   font-weight: bold;
