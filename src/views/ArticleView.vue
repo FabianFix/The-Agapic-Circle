@@ -26,8 +26,14 @@
                 Last updated: {{article.last_updated.split('T')[0]}}
             </p>
             <div class="navigationFooter">
-                <div @click="$router.go(-1)" class="back" v-if="article.title">&laquo; Back</div>
-                <div v-if="nextArticle.id">
+                <div @click="$router.go(-1)" class="back w-one-third" v-if="article.title">&laquo; Back</div>
+                <div v-if="article.title" class="relatedAuthors w-one-third">
+                    <span class="bold red underline">Related Authors</span>
+                    <div v-for="relatedAuthor of article.mentioned_authors" :key="relatedAuthor">
+                        {{relatedAuthor}}
+                    </div>
+                </div>
+                <div v-if="nextArticle.id" class="furtherReading w-one-third">
                     <span class="bold red underline">Further Reading</span>
                     <div class="nextArticle next" @click="$router.push({name: 'article', params: {id: nextArticle.id}})">
                         {{nextArticle.title}} &raquo; <img :src="nextArticle.image_url">
@@ -146,6 +152,10 @@ export default {
     }
 }
 
+.relatedAuthors {
+    text-align: center;
+}
+
 .profilePicture {
     width: 250px;
     height: 250px;
@@ -164,7 +174,7 @@ export default {
 
 .nextArticle {
     padding: 10px;
-    margin: 10px;
+    margin-block: 10px;
     border: 1px solid #000;
     border-radius: 10px;
     display: flex;
@@ -178,12 +188,23 @@ export default {
     }
 }
 
+.w-one-third {
+    width: 33vw;
+}
+
 .footnote {
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: row;
     gap: 10px;
+}
+
+.furtherReading {
+    display: flex;
+    justify-content: center;
+    align-items:flex-end;
+    flex-direction: column;
 }
 
 </style>
